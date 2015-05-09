@@ -1,0 +1,15 @@
+Here is a script and a Makefile for generating a GNU Make docset for Dash.
+
+- GNU Make: http://www.gnu.org/software/make/
+- Dash: https://kapeli.com/dash
+
+To generate a docset from the latest edition of the GNU Make Manual, simply
+execute `make` from the same directory as this README file. The latest edition
+will be downloaded from www.gnu.org and packaged appropriately.
+
+Requirements:
+
+- curl
+- make
+- ruby
+- sqlite3
