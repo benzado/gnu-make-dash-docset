@@ -8,17 +8,25 @@ DOCUMENTS_DIR = $(RESOURCES_DIR)/Documents
 INFO_PLIST_FILE = $(CONTENTS_DIR)/Info.plist
 INDEX_FILE      = $(RESOURCES_DIR)/docSet.dsidx
 ICON_FILE       = $(DOCSET_DIR)/icon.png
+ARCHIVE_FILE    = $(DOCSET_NAME).tgz
 
 MANUAL_URL  = http://www.gnu.org/software/make/manual/make.html_node.tar.gz
 MANUAL_FILE = tmp/make.html_node.tar.gz
 
-all: $(INFO_PLIST_FILE) $(INDEX_FILE) $(ICON_FILE)
+DOCSET = $(INFO_PLIST_FILE) $(INDEX_FILE) $(ICON_FILE)
+
+all: $(DOCSET)
+
+archive: $(ARCHIVE_FILE)
 
 clean:
-	rm -rf $(DOCSET_DIR)
+	rm -rf $(DOCSET_DIR) $(ARCHIVE_FILE)
 
 tmp:
 	mkdir $@
+
+$(ARCHIVE_FILE): $(DOCSET)
+	tar --exclude='.DS_Store' -czf $@ $(DOCSET_DIR)
 
 $(MANUAL_FILE): tmp
 	curl -o $@ $(MANUAL_URL)
