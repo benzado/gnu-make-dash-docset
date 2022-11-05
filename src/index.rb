@@ -9,7 +9,7 @@ INSERT_SQL = %Q[
   INSERT INTO searchIndex(name, type, path) VALUES ('%s','%s','%s');
 ]
 
-PATTERN = %r[<title>GNU make: (.+)</title>]
+PATTERN = %r[<title>(.+)</title>]
 
 def quote(s)
   s.gsub(/&amp;/, '&').gsub(/'/, "\\'")
@@ -19,9 +19,12 @@ ARGV.each do |arg|
   Pathname.glob(arg) do |path|
     match = path.each_line.lazy.map { |line| PATTERN.match(line) }.find { |m| m }
     if match
-      printf INSERT_SQL, quote(match[1]), 'Guide', path.basename
+      title = match[1]
+      title.delete_prefix!('GNU make: ') # older docs
+      title.delete_suffix!(' (GNU make)') # newer docs
+      printf INSERT_SQL, quote(title), 'Guide', path.basename
     else
-      $stderr.puts "%{path.basename}: no title found"
+      $stderr.puts "#{path}: no title found"
     end
   end
 end

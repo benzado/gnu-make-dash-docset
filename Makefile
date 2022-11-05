@@ -23,7 +23,7 @@ clean:
 	rm -rf $(DOCSET_DIR) $(ARCHIVE_FILE)
 
 tmp:
-	mkdir $@
+	mkdir -p $@
 
 $(ARCHIVE_FILE): $(DOCSET)
 	tar --exclude='.DS_Store' -czf $@ $(DOCSET_DIR)
@@ -32,16 +32,16 @@ $(MANUAL_FILE): tmp
 	curl -o $@ $(MANUAL_URL)
 
 $(DOCSET_DIR):
-	mkdir $@
+	mkdir -p $@
 
 $(CONTENTS_DIR): $(DOCSET_DIR)
-	mkdir $@
+	mkdir -p $@
 
 $(RESOURCES_DIR): $(CONTENTS_DIR)
-	mkdir $@
+	mkdir -p $@
 
 $(DOCUMENTS_DIR): $(RESOURCES_DIR) $(MANUAL_FILE)
-	mkdir $@
+	mkdir -p $@
 	tar -x -z -f $(MANUAL_FILE) -C $@
 
 $(INFO_PLIST_FILE): src/Info.plist $(CONTENTS_DIR)
