@@ -21,7 +21,7 @@ ARGV.each do |arg|
     if match
       printf INSERT_SQL, quote(match[1]), 'Guide', path.basename
     else
-      $stderr.puts "%{path.basename}: no title found"
+      $stderr.puts "#{path}: no title found"
     end
   end
 end
