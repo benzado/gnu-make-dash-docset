@@ -1,3 +1,11 @@
+Since 2023 the GNU Make docset has been maintained by @lshprung, who has
+refined and expanded it to include several other GNU tools.
+
+- https://github.com/lshprung/gnu-make-dash-docset
+- https://github.com/lshprung/dash-docset-builder
+
+* * *
+
 Here is a script and a Makefile for generating a GNU Make docset for Dash.
 
 - GNU Make: http://www.gnu.org/software/make/
